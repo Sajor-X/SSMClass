@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!-- 1.定义业务 bean(目标类) -->
+    <bean id="userxml" class="com.sajor.study.c03.UserXML"/>
+    <!-- 2.定义代理类(切面类) -->
+    <bean id="myAspectJ" class="com.sajor.study.c03.UserXMLAspectJ"/>
+    <!-- 3.定义 aspectj-->
+
+    <aop:config>
+        <aop:aspect id="userAspect" ref="myAspectJ">
+            <!--3.1 定义切点-->
+            <aop:pointcut id="userQueryUser" expression="execution(* com.sajor.study.c03.UserXML.queryUser(..))"/>
+            <!--3.2 定义通知-->
+            <aop:before pointcut-ref="userQueryUser" method="aspectBefore" />
+            <aop:after-returning pointcut-ref="userQueryUser" method="aspectAfter"/>
+        </aop:aspect>
+    </aop:config>
+</beans>
