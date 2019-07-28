@@ -14,5 +14,7 @@
     <orderEntry type="library" name="commons-logging-1.2" level="project" />
     <orderEntry type="library" name="aspectj-1.8" level="project" />
     <orderEntry type="library" name="mysql-connector-java-5.1.41" level="project" />
+    <orderEntry type="library" name="mybatis-3.4.5" level="project" />
+    <orderEntry type="library" name="mybatis-3.4" level="project" />
   </component>
 </module>
