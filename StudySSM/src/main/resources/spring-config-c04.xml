@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="student" class="com.sajor.study.c01.Student">
+    </bean>
+    <bean id="school" class="com.sajor.study.c01.School">
+        <property name="students" ref="student"/>
+    </bean>
+
+    <!-- 1.配置数据源 -->
+    <bean id="dataSourceJDBC"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url"
+                  value="jdbc:mysql://localhost:3306/TestDB?autoReconnect=true&amp;characterEncoding=utf8&amp;useUnicode=true&amp;useSSL=false"/>
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
+    </bean>
+
+    <!-- 2.配置 JDBC 模板 -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSourceJDBC"/>
+    </bean>
+
+    <!--3.定义使用 jdbc 模板的 jdbcTemplateUtil 类 -->
+    <bean id="jdbcTemplateUtil" class="com.sajor.study.c04.JdbcTemplateUtil">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+</beans>
