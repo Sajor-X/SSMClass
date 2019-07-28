@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="user1" class="com.sajor.study.c02.xml.User">
+        <constructor-arg index="0" value="20180501"/>
+        <constructor-arg index="1" value="张一帆"/>
+        <constructor-arg index="2" value="男"/>
+        <constructor-arg index="3" value="zhangyifan@hbxy.cn"/>
+    </bean>
+
+    <bean id="user2" class="com.sajor.study.c02.xml.User">
+        <property name="id" value="20180502"/>
+        <property name="name" value="李大壮"/>
+        <property name="sex" value="男"/>
+        <property name="email" value="lidazhuang@hbxy.cn"/>
+    </bean>
+</beans>
