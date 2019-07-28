@@ -31,6 +31,7 @@ public class JdbcTemplateUtil {
     public void addUser(Student student) {
         String sql = "insert into user (name,sex,email) values(?,?,?)";
         jdbcTemplate.update(sql, student.getName(), student.getSex(), student.getEmail());
+        errorTest.length();//故意执行一个未初始化对象的方法
     }
 
     public void deleteUser(int id) {
