@@ -31,4 +31,28 @@ public class UserDAO {
         sqlSession.close();
         return user;
     }
+
+    //下面是新增方法
+
+    /**
+     * 根据用户编号查询用户及简历信息
+     */
+    public User findUserWithResumesByID(int id) throws Exception {
+        // 1、读取配置文件
+        String resource = "mybatis-config-c06-relation.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+
+        // 2、根据配置文件构建 SqlSessionFactory
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        // 3、通过 SqlSessionFactory 创建 SqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        // 4、SqlSession 执行映射文件中定义的 SQL，并返回映射结果
+//        User user = sqlSession.selectOne("com.sajor.study.c06.mapper.UserMapper.findUserWithResumesByID", id);
+        User user = sqlSession.selectOne("com.sajor.study.c06.mapper.UserMapper.findUserWithResumesByID2", id);
+        // 5、关闭 SqlSession
+        sqlSession.close();
+        return user;
+    }
 }

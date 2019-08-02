@@ -11,7 +11,11 @@ public class MyBatisRelationTest {
             ApplicationContext ctx =
                     new ClassPathXmlApplicationContext("spring-config-mybatis-c06-relation.xml");
             UserDAO userDAO = (UserDAO) ctx.getBean("userDAO");
-            User user = userDAO.findUserById(2);
+
+//            User user = userDAO.findUserById(2);
+
+            User user = userDAO.findUserWithResumesByID(2);
+
             System.out.println(user);
         } catch (Exception e) {
             e.printStackTrace();

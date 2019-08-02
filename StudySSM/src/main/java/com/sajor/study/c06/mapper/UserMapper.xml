@@ -35,4 +35,48 @@
             <result property="code" column="code"/>
         </association>
     </resultMap>
+
+    <!--下面是新增对简历的查询-->
+
+    <!-- 一对多:查看某一用户及其关联的简历信息 注意:子查询方式 -->
+    <select id="findUserWithResumesByID" parameterType="Integer"
+            resultMap="UserWithResumesResult">
+        SELECT user.* from user WHERE user.id=#{id}
+    </select>
+    <resultMap type="com.sajor.study.c06.model.User" id="UserWithResumesResult">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="sex" column="sex"/>
+        <result property="email" column="email"/>
+        <!-- 一对多关联映射:collection
+            ofType 表示属性集合中元素的类型，List<Resume>属性即 Resume 类 -->
+        <collection property="resumeList" column="id"
+                    ofType="com.sajor.study.c06.model.Resume"
+                    select="com.sajor.study.c06.mapper.ResumeMapper.findResumeByUserId">
+            <id property="resumeId" column="resumeid"/>
+            <result property="userId" column="userid"/>
+            <result property="resumeName" column="resumename"/>
+            <result property="resumeDesc" column="resumedesc"/>
+        </collection>
+    </resultMap>
+
+    <!-- 一对多:查看某一用户及其关联的简历信息
+    注意:当关联查询出的列名相同，则需要使用别名区分(比如:表名.列名 as 列的别名) -->
+    <select id="findUserWithResumesByID2" parameterType="Integer" resultMap="UserWithResumesResult2">
+        SELECT user.*, resume.* from user, resume WHERE user.id=resume.userid and user.id=#{id}
+    </select>
+    <resultMap type="com.sajor.study.c06.model.User" id="UserWithResumesResult2">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="sex" column="sex"/>
+        <result property="email" column="email"/>
+        <!-- 一对多关联映射:collection
+            ofType 表示属性集合中元素的类型，List<Resume>属性即 Resume 类 -->
+        <collection property="resumeList" ofType="com.sajor.study.c06.model.Resume">
+            <id property="resumeId" column="resumeid"/>
+            <result property="userId" column="userid"/>
+            <result property="resumeName" column="resumename"/>
+            <result property="resumeDesc" column="resumedesc"/>
+        </collection>
+    </resultMap>
 </mapper>

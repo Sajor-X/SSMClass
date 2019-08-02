@@ -25,6 +25,6 @@
     <mappers>
         <mapper resource="com/sajor/study/c06/mapper/UserMapper.xml"/>
         <mapper resource="com/sajor/study/c06/mapper/CardMapper.xml"/>
-
+        <mapper resource="com/sajor/study/c06/mapper/ResumeMapper.xml"/>
     </mappers>
 </configuration>
