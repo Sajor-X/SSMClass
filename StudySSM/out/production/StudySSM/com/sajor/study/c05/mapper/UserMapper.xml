@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 表示命名空间 -->
+<mapper namespace="com.sajor.study.c05.mapper.UserMapper">
+
+    <!--根据用户编号获取用户信息 -->
+    <select id="findUserById" parameterType="Integer" resultType="com.sajor.study.c05.model.User">
+        select * from USER where id = #{id}
+    </select>
+
+    <!--根据用户名模糊查询用户信息列表-->
+    <select id="findUserByName" parameterType="String" resultType="com.sajor.study.c05.model.User">
+        select * from USER where name like concat('%',#{value},'%')
+    </select>
+
+    <!-- 添加用户信息 -->
+    <insert id="addUser" parameterType="com.sajor.study.c05.model.User">
+        insert into USER(name,sex,email) values(#{name},#{sex},#{email})
+    </insert>
+
+    <!-- 更新用户信息 -->
+    <update id="updateUser" parameterType="com.sajor.study.c05.model.User">
+        update USER set name=#{name},sex=#{sex},email=#{email} where id=#{id}
+    </update>
+
+    <!-- 删除用户 -->
+    <delete id="deleteUser" parameterType="Integer">
+        delete from USER where id=#{id}
+    </delete>
+</mapper>

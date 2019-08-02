@@ -2,6 +2,9 @@
 
 这是一个Spring+SpringMVC+MyBatis的入门教程
 
+手把手教你整合最优雅SSM框架：SpringMVC + Spring + MyBatis
+
+
 - [JAVA 开发环境配置](markdown-file/c01.md)
 - [GitHub配置（可以跳过）](markdown-file/c02.md)
 - [第一个Spring应用](markdown-file/c03.md)

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 表示命名空间 -->
+<mapper namespace="com.sajor.study.c06.mapper.UserMapper">
+
+    <select id="findUserById" parameterType="Integer" resultMap="CardWithUserResult">
+        SELECT * from USER where id=#{id}
+    </select>
+
+
+    <resultMap type="com.sajor.study.c06.model.User" id="CardWithUserResult">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="sex" column="sex"/>
+        <result property="email" column="email"/>
+        <!-- 一对一:association 使用 select 属性引入另外一条 SQL 语句 -->
+        <association property="card" column="id" javaType="com.sajor.study.c06.model.Card"
+                     select="com.sajor.study.c06.mapper.CardMapper.findCodeById"/>
+    </resultMap>
+
+
+    <!-- 嵌套结果:使用嵌套结果映射来处理重复的联合结果的子集 -->
+    <select id="findUserById2" parameterType="Integer" resultMap="CardWithUserResult2">
+        SELECT user.*,card.code from user,card
+        where user.id=card.id and user.id= #{id}
+    </select>
+
+    <resultMap type="com.sajor.study.c06.model.User" id="CardWithUserResult2">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="sex" column="sex"/>
+        <result property="email" column="email"/>
+        <association property="card" javaType="com.sajor.study.c06.model.Card">
+            <id property="id" column="id"/>
+            <result property="code" column="code"/>
+        </association>
+    </resultMap>
+</mapper>
