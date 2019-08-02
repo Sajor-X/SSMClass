@@ -5,4 +5,12 @@
     <select id="findResumeByUserId" parameterType="Integer" resultType="com.sajor.study.c06.model.Resume">
         SELECT * from resume where userid = #{id}
     </select>
+
+    <!--下面是新增内容:通过 jobid 查关联简历-->
+    <select id="findResumeById" parameterType="Integer" resultType="com.sajor.study.c06.model.Resume">
+        SELECT * from Resume where resumeid IN(
+            SELECT resumeid FROM jobresume WHERE jobid = #{id}
+        )
+    </select>
+
 </mapper>

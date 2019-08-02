@@ -23,8 +23,9 @@
 
     <!--2.配置 Mapper 的位置 -->
     <mappers>
-        <mapper resource="com/sajor/study/c06/mapper/UserMapper.xml"/>
-        <mapper resource="com/sajor/study/c06/mapper/CardMapper.xml"/>
+        <mapper resource="com/sajor/study/c06/mapper/UserMapper.xml" />
+        <mapper resource="com/sajor/study/c06/mapper/CardMapper.xml" />
         <mapper resource="com/sajor/study/c06/mapper/ResumeMapper.xml"/>
+        <mapper resource="com/sajor/study/c06/mapper/JobMapper.xml" />
     </mappers>
 </configuration>

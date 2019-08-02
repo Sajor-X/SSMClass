@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 表示命名空间 -->
+<mapper namespace="com.sajor.study.c06.mapper.JobMapper">
+
+    <!-- 多对多嵌套查询:通过执行另外一条 SQL 映射语句来返回预期的特殊类型 -->
+    <select id="findJobWithResumesByID" parameterType="Integer" resultMap="JobWithResumeResult">
+        select * from job WHERE jobid=#{id}
+    </select>
+
+    <resultMap type="com.sajor.study.c06.model.Job" id="JobWithResumeResult">
+        <id property="jobId" column="jobid"/>
+        <result property="jobTitle" column="jobtitle"/>
+        <collection property="resumeList" column="jobid"
+                    ofType="com.sajor.study.c06.model.Resume"
+                    select="com.sajor.study.c06.mapper.ResumeMapper.findResumeById"></collection>
+    </resultMap>
+
+    <!-- 多对多嵌套结果查询:查询某岗位及其关联的简历详情 -->
+    <select id="findJobWithResumesByID2" parameterType="Integer" resultMap="JobWithResumeResult2">
+        select job.*,resume.*
+        from job,resume,jobresume
+        WHERE job.jobid=jobresume.jobid
+        and resume.resumeid=jobresume.resumeid and job.jobid=#{id}
+    </select>
+
+    <!-- 自定义手动映射类型 -->
+    <resultMap type="com.sajor.study.c06.model.Job" id="JobWithResumeResult2">
+        <id property="jobId" column="jobid"/>
+        <result property="jobTitle" column="jobtitle"/>
+        <!-- 多对多关联映射:collection -->
+        <collection property="resumeList"
+                    ofType="com.sajor.study.c06.model.Resume">
+            <id property="resumeId" column="resumeid"/>
+            <result property="resumeName" column="resumename"/>
+            <result property="resumeDesc" column="resumedesc"/>
+        </collection>
+    </resultMap>
+</mapper>

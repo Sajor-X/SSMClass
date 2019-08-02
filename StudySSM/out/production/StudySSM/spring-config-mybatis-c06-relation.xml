@@ -3,6 +3,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-        <bean id="userDAO" class="com.sajor.study.c06.dao.UserDAO" />
-        <bean id="user" class="com.sajor.study.c06.model.User" /> <bean id="card" class="com.sajor.study.c06.model.Card" />
+    <bean id="userDAO" class="com.sajor.study.c06.dao.UserDAO"/>
+    <bean id="user" class="com.sajor.study.c06.model.User"/>
+    <bean id="card" class="com.sajor.study.c06.model.Card"/>
+    <bean id="jobDAO" class="com.sajor.study.c06.dao.JobDAO"/>
 </beans>
